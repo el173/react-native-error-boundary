@@ -1,0 +1,16 @@
+{
+  "name": "@el173/react-native-error-boundary",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-native": "^0.64.0"
+  },
+  "author": "Hashith Karunarathne",
+  "license": "ISC"
+}
