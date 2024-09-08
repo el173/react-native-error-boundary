@@ -1,6 +1,6 @@
 {
   "name": "@el173/react-native-error-boundary",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

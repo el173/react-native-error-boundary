@@ -50,6 +50,9 @@ const MyComponent = () => {
 export default App;
 ```
 
+![Basic GIF](https://raw.githubusercontent.com/el173/react-native-error-boundary/master/blob/demo/basic.gif)
+
+
 ### Custom Error Message
 
 You can provide a custom error message to display when an error occurs:
@@ -75,6 +78,8 @@ You can pass a custom `onError` callback to log errors or handle them in any oth
 </ErrorBoundary>
 ```
 
+![Custom message GIF](https://raw.githubusercontent.com/el173/react-native-error-boundary/master/blob/demo/customError.gif)
+
 ### Custom Error UI
 
 You can define your own error UI by passing the `renderError` prop:
@@ -91,6 +96,8 @@ You can define your own error UI by passing the `renderError` prop:
   <MyComponent />
 </ErrorBoundary>
 ```
+
+![Custom UI GIF](https://raw.githubusercontent.com/el173/react-native-error-boundary/master/blob/demo/customUI.gif)
 
 ### Example: Using All Features
 
