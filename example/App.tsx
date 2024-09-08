@@ -19,7 +19,6 @@ import {
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-// import ErrorBoundary from './myg';
 import ErrorBoundary from '@el173/react-native-error-boundary';
 
 import CustomErrorComponent from './CustomErrorComponent';
@@ -68,37 +67,45 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        {/* <ErrorBoundary
-          renderError={(error, errorInfo) => CustomErrorComponent(error, errorInfo)}
-        >
+    <SafeAreaView style={backgroundStyle}>
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        backgroundColor={backgroundStyle.backgroundColor}
+      />
+      <ErrorBoundary
+        renderError={(error, errorInfo) => CustomErrorComponent(error, errorInfo)}
+        // enableOriginalHandler={true}
+        // onError={(err, isFatal) => {
+        //   console.log('---------handle error optionally here', err, isFatal);
+        // }}
+      >
+        <View style={styles.sectionContainer}>
           <View>
             <Button title="Throw Error" onPress={throwError} />
           </View>
-        </ErrorBoundary> */}
-        <ErrorBoundary message="Something went wrong. Please try again later." enableOriginalHandler={true}>
+        </View>
+      </ErrorBoundary>
+
+      {/* <ErrorBoundary 
+        message="Something went wrong. Please try again later." 
+        // enableOriginalHandler={true}
+        // showStackTrace
+        onError={(err, isFatal) => {
+          console.log('---------handle error optionally here', err, isFatal);
+        }}
+      >
         <View style={styles.sectionContainer}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
           <Button title="Throw Error" onPress={throwError} />
         </View>
-        </ErrorBoundary>
-      </SafeAreaView>
-    </>
+      </ErrorBoundary> */}
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    flex: 1,
+    justifyContent: 'center',
   },
   sectionTitle: {
     fontSize: 24,

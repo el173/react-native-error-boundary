@@ -1,6 +1,6 @@
 {
   "name": "@el173/react-native-error-boundary",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,8 +9,37 @@
   "devDependencies": {
     "typescript": "^4.0.0",
     "@types/react": "^17.0.0",
-    "@types/react-native": "^0.64.0"
+    "@types/react-native": "^0.64.0",
+    "react": "18.2.0",
+    "react-native": "0.74.3"
   },
   "author": "Hashith Karunarathne",
-  "license": "ISC"
+  "license": "MIT",
+  "description": "A customizable error boundary component for React Native to catch and handle errors in your app with options for custom error handling.",
+  "homepage": "https://github.com/el173/react-native-error-boundary/tree/master/error-boundary-module#README",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/el173/react-native-error-boundary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/el173/react-native-error-boundary/issues"
+  },
+  "keywords": [
+    "error",
+    "callback",
+    "js error",
+    "react-native",
+    "react-native-error",
+    "error-boundary",
+    "react-native-error-boundary",
+    "react-native-error-handler",
+    "react-native-error-handling",
+    "react-native-crash-handler",
+    "react-native-exception",
+    "react-native-bug-tracking",
+    "react-native-debugging",
+    "react-native-fatal-error",
+    "react-native-custom-error",
+    "react-native-error-ui"
+  ]
 }

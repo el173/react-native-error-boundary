@@ -8,9 +8,18 @@ interface ErrorBoundaryProps {
   renderError?: (error: Error | null, errorInfo: string | undefined) => ReactNode;
   message?: string;
   enableOriginalHandler?: boolean;
+  onError?: ErrorHandlerCallback;
+  showStackTrace?: boolean;
 }
 
-const ErrorBoundary = ({children, renderError, message, enableOriginalHandler }: ErrorBoundaryProps) => {
+const ErrorBoundary = ({
+  children,
+  renderError,
+  message,
+  enableOriginalHandler,
+  onError,
+  showStackTrace = false,
+}: ErrorBoundaryProps) => {
   const [error, setError] = useState<Error | null>(null);
   const [showStack, setShowStack] = useState(false);
   const [maxStackHeight, setMaxStackHeight] = useState(
@@ -21,6 +30,10 @@ const ErrorBoundary = ({children, renderError, message, enableOriginalHandler }:
     const errorHandler = (err: Error, errorInfo: { isFatal: boolean }) => {
       if (errorInfo.isFatal) {
         setError(err);
+
+        if (onError) {
+          onError(err, errorInfo.isFatal);
+        }
       }
     };
 
@@ -37,7 +50,7 @@ const ErrorBoundary = ({children, renderError, message, enableOriginalHandler }:
     return () => {
       ErrorUtils.setGlobalHandler(originalHandler);
     };
-  }, [enableOriginalHandler]);
+  }, [enableOriginalHandler, onError]);
 
   useEffect(() => {
     const handleResize = ({ window }: { window: ScaledSize }) => {
@@ -50,7 +63,6 @@ const ErrorBoundary = ({children, renderError, message, enableOriginalHandler }:
       Dimensions.removeEventListener('change', handleResize);
     };
   }, []);
-  
 
   const handleShowStack = () => {
     setShowStack(!showStack);
@@ -61,20 +73,20 @@ const ErrorBoundary = ({children, renderError, message, enableOriginalHandler }:
       <View style={styles.mainWrapper}>
         {renderError(error, error.stack)}
       </View>
-    ) :
-    <ScrollView contentContainerStyle={styles.mainWrapper}>
-      <Text>{message || 'An error occurred. Please restart the app.'}</Text>
-      <TouchableOpacity onPress={handleShowStack}>
-        <Text style={styles.errorText}>{error.toString()}</Text>
-      </TouchableOpacity>
-      {showStack && (
-        <ScrollView
-          style={[styles.errorStackContainer, { maxHeight: maxStackHeight }]}>
-          <Text style={styles.errorStack}>{error.stack}</Text>
-        </ScrollView>
-      )}
-    </ScrollView>
-    ;
+    ) : (
+      <ScrollView contentContainerStyle={styles.mainWrapper}>
+        <Text>{message || 'An error occurred. Please restart the app.'}</Text>
+        <TouchableOpacity onPress={showStackTrace ? handleShowStack : undefined}>
+          <Text style={styles.errorText}>{error.toString()}</Text>
+        </TouchableOpacity>
+        {showStackTrace && showStack && (
+          <ScrollView
+            style={[styles.errorStackContainer, { maxHeight: maxStackHeight }]}>
+            <Text style={styles.errorStack}>{error.stack}</Text>
+          </ScrollView>
+        )}
+      </ScrollView>
+    );
   }
 
   return children;

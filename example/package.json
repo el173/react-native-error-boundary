@@ -1,6 +1,6 @@
 {
   "name": "rnErrorBoundaryBase",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@el173/react-native-error-boundary": "file:../error-boundary-module",
+    "@el173/react-native-error-boundary": "^1.0.8",
     "react": "18.2.0",
     "react-native": "0.74.3"
   },

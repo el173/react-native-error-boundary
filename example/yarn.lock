@@ -1165,9 +1165,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@el173/react-native-error-boundary@file:../error-boundary-module":
-  version "1.0.0"
-  resolved "file:../error-boundary-module"
+"@el173/react-native-error-boundary@^1.0.8":
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/@el173/react-native-error-boundary/-/react-native-error-boundary-1.0.9.tgz"
+  integrity sha512-oYcLlMtj59tXI9TFf7ZzFucUsDaKEd9awDz+ZMkUE3gnxYzVcMML1IXeZT1kS/XSvVhnSDNJMEUHdLyuVzyRgQ==
 
 "@eslint-community/eslint-utils@^4.2.0", "@eslint-community/eslint-utils@^4.4.0":
   version "4.4.0"

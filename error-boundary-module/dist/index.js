@@ -26,14 +26,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
 var ErrorBoundary = function (_a) {
-    var children = _a.children, renderError = _a.renderError, message = _a.message, enableOriginalHandler = _a.enableOriginalHandler;
-    var _b = (0, react_1.useState)(null), error = _b[0], setError = _b[1];
-    var _c = (0, react_1.useState)(false), showStack = _c[0], setShowStack = _c[1];
-    var _d = (0, react_1.useState)(react_native_1.Dimensions.get('window').height / 2), maxStackHeight = _d[0], setMaxStackHeight = _d[1];
+    var children = _a.children, renderError = _a.renderError, message = _a.message, enableOriginalHandler = _a.enableOriginalHandler, onError = _a.onError, _b = _a.showStackTrace, showStackTrace = _b === void 0 ? false : _b;
+    var _c = (0, react_1.useState)(null), error = _c[0], setError = _c[1];
+    var _d = (0, react_1.useState)(false), showStack = _d[0], setShowStack = _d[1];
+    var _e = (0, react_1.useState)(react_native_1.Dimensions.get('window').height / 2), maxStackHeight = _e[0], setMaxStackHeight = _e[1];
     (0, react_1.useEffect)(function () {
         var errorHandler = function (err, errorInfo) {
             if (errorInfo.isFatal) {
                 setError(err);
+                if (onError) {
+                    onError(err, errorInfo.isFatal);
+                }
             }
         };
         var globalHandler = function (err, isFatal) {
@@ -47,7 +50,7 @@ var ErrorBoundary = function (_a) {
         return function () {
             ErrorUtils.setGlobalHandler(originalHandler);
         };
-    }, [enableOriginalHandler]);
+    }, [enableOriginalHandler, onError]);
     (0, react_1.useEffect)(function () {
         var handleResize = function (_a) {
             var window = _a.window;
@@ -62,13 +65,12 @@ var ErrorBoundary = function (_a) {
         setShowStack(!showStack);
     };
     if (error) {
-        return renderError ? (react_1.default.createElement(react_native_1.View, { style: styles.mainWrapper }, renderError(error, error.stack))) :
-            react_1.default.createElement(react_native_1.ScrollView, { contentContainerStyle: styles.mainWrapper },
-                react_1.default.createElement(react_native_1.Text, null, message || 'An error occurred. Please restart the app.'),
-                react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: handleShowStack },
-                    react_1.default.createElement(react_native_1.Text, { style: styles.errorText }, error.toString())),
-                showStack && (react_1.default.createElement(react_native_1.ScrollView, { style: [styles.errorStackContainer, { maxHeight: maxStackHeight }] },
-                    react_1.default.createElement(react_native_1.Text, { style: styles.errorStack }, error.stack))));
+        return renderError ? (react_1.default.createElement(react_native_1.View, { style: styles.mainWrapper }, renderError(error, error.stack))) : (react_1.default.createElement(react_native_1.ScrollView, { contentContainerStyle: styles.mainWrapper },
+            react_1.default.createElement(react_native_1.Text, null, message || 'An error occurred. Please restart the app.'),
+            react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: showStackTrace ? handleShowStack : undefined },
+                react_1.default.createElement(react_native_1.Text, { style: styles.errorText }, error.toString())),
+            showStackTrace && showStack && (react_1.default.createElement(react_native_1.ScrollView, { style: [styles.errorStackContainer, { maxHeight: maxStackHeight }] },
+                react_1.default.createElement(react_native_1.Text, { style: styles.errorStack }, error.stack)))));
     }
     return children;
 };
