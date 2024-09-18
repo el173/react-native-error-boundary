@@ -1,6 +1,6 @@
 # React Native ErrorBoundary
 
-A customizable `ErrorBoundary` component for React Native applications that helps catch and handle unexpected errors in your app. You can provide a custom error message, an `onError` callback, and a custom render for the error UI.
+A simple and customizable `ErrorBoundary` for React Native applications (React Native Error Boundary) that helps catch and handle unexpected errors in your app. You can provide a custom error message, an `onError` callback, and a custom render for the error UI.
 
 ## Features
 
@@ -14,7 +14,7 @@ A customizable `ErrorBoundary` component for React Native applications that help
 You can install this component via npm or yarn:
 
 ```bash
-npm install @el173/@el173/react-native-error-boundary
+npm install @el173/react-native-error-boundary
 ```
 
 or
@@ -99,37 +99,6 @@ You can define your own error UI by passing the `renderError` prop:
 
 ![Custom UI GIF](https://raw.githubusercontent.com/el173/react-native-error-boundary/master/blob/demo/customUI.gif)
 
-### Example: Using All Features
-
-```tsx
-import React from 'react';
-import { View, Text } from 'react-native';
-import ErrorBoundary from '@el173/react-native-error-boundary';
-
-const App = () => {
-  return (
-    <ErrorBoundary 
-      message="Oops! Something went wrong." 
-      onError={(error, isFatal) => console.log("Caught an error:", error, "Fatal:", isFatal)}
-      renderError={(error, errorInfo) => (
-        <View>
-          <Text style={{ color: 'red' }}>An error occurred: {error.message}</Text>
-          <Text>{errorInfo}</Text>
-        </View>
-      )}
-    >
-      <MyComponent />
-    </ErrorBoundary>
-  );
-};
-
-const MyComponent = () => {
-  throw new Error("Sample error!");
-  return <Text>Hello World!</Text>;
-};
-
-export default App;
-```
 
 ## Props
 
